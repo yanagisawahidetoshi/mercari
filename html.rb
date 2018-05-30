@@ -7,7 +7,9 @@ class Html
   end
 
   def build_doc(url)
-    @driver = Selenium::WebDriver.for :chrome
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    @driver = Selenium::WebDriver.for :chrome, options: options
     @driver.get url
     Nokogiri::HTML driver.page_source.encode("UTF-8")
   end
