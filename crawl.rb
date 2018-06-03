@@ -1,11 +1,8 @@
-require 'selenium-webdriver'
-require "nokogiri"
-require "open-uri"
-require "active_record"
+require 'nokogiri'
+require 'open-uri'
 require './common'
 require './db'
 require './html'
-require './list_url'
 
 
 class Crawl
@@ -38,7 +35,13 @@ class Crawl
   			if box.css('.item-sold-out-badge').length > 0
   				item.is_sold = 1
   			end
-  			item.photo_url = doc.css('.items-box').css('img').first[:src].sub!(/\?.*/m, "")
+
+        begin
+  			 item.photo_url = doc.css('.items-box').css('img').first[:src].sub!(/\?.*/m, "")
+        rescue
+          puts item.url
+          exit
+        end
   			item.save
   			# saved_photo(item.id, doc.css('.items-box').css('img').first[:src])
   		end
