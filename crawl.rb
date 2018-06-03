@@ -1,6 +1,5 @@
 require 'nokogiri'
 require 'open-uri'
-require './common'
 require './db'
 require './html'
 
