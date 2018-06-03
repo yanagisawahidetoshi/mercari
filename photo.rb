@@ -13,8 +13,7 @@ class Photo
 
       items.each do |item|
         savedPhoto(item)
-        puts item.id
-        exit
+        sleep(2)
       end
     end
 
